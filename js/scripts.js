@@ -5,61 +5,89 @@ function numeralControl(originalNumber) {
     var onesPlace = alteredNumber % 10;
     numeralArray.push(onesDigitConverter(onesPlace));
     alteredNumber -= onesPlace;
-  }
+  };
   if (alteredNumber % 100 != 0) {
     var tensPlace = alteredNumber % 100;
     numeralArray.push(tensDigitConverter(tensPlace));
     alteredNumber -= tensPlace;
   };
+  if (alteredNumber % 1000 != 0) {
+    var hundredsPlace = alteredNumber % 1000;
+    numeralArray.push(hundredsDigitConverter(hundredsPlace));
+    alteredNumber -= hundredsPlace;
+  };
+
   numeralArray.reverse();
   return numeralArray.join("");
 }
 
 function onesDigitConverter(onesPlace) {
-  var romanNumeralArray = [];
+  var onesDigits = [];
   if (onesPlace < 4) {
     for (i = 0; i < onesPlace; i++) {
-      romanNumeralArray.push("I");
+      onesDigits.push("I");
     };
 
   } else if (onesPlace === 4) {
-    romanNumeralArray.push("IV");
+    onesDigits.push("IV");
 
   } else if (5 <= onesPlace && onesPlace < 9) {
-    romanNumeralArray.push("V");
+    onesDigits.push("V");
     for (i = 5; i < onesPlace; i++) {
-      romanNumeralArray.push("I");
+      onesDigits.push("I");
     };
 
   } else if (onesPlace === 9) {
-    romanNumeralArray.push("IX");
+    onesDigits.push("IX");
   };
 
-  return romanNumeralArray.join("");
+  return onesDigits.join("");
 }
 
 function tensDigitConverter(tensPlace) {
-  console.log(tensPlace);
-  var romanNumeralArray = [];
+  var tensDigits = [];
   if (tensPlace < 40) {
     for (i = 0; i < tensPlace; i += 10) {
-      romanNumeralArray.push("X");
+      tensDigits.push("X");
     };
 
   } else if (tensPlace === 40) {
-    romanNumeralArray.push("XL");
+    tensDigits.push("XL");
 
   } else if (50 <= tensPlace && tensPlace < 90) {
-    romanNumeralArray.push("L");
+    tensDigits.push("L");
     for (i = 50; i < tensPlace; i += 10) {
-      romanNumeralArray.push("X");
+      tensDigits.push("X");
     };
 
   } else if (tensPlace === 90) {
-    romanNumeralArray.push("XC");
+    tensDigits.push("XC");
   };
 
-  return romanNumeralArray.join("");
+  return tensDigits.join("");
+}
+
+function hundredsDigitConverter(hundredsPlace) {
+  var hundredsDigits = [];
+  if (hundredsPlace < 400) {
+    for (i = 0; i < hundredsPlace; i += 100) {
+      hundredsDigits.push("C");
+    };
+
+  } else if (hundredsPlace === 400) {
+    hundredsDigits.push("CD");
+
+  } else if (500 <= hundredsPlace && hundredsPlace < 900) {
+    hundredsDigits.push("D");
+    for (i = 500; i < hundredsPlace; i += 100) {
+      hundredsDigits.push("C");
+    };
+
+  } else if (hundredsPlace === 900) {
+    hundredsDigits.push("CM");
+  };
+
+  return hundredsDigits.join("");
 }
 
 

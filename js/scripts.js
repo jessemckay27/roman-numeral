@@ -16,6 +16,12 @@ function numeralControl(originalNumber) {
     numeralArray.push(hundredsDigitConverter(hundredsPlace));
     alteredNumber -= hundredsPlace;
   };
+  if (alteredNumber % 10000 != 0 && alteredNumber < 4000) {
+    var thousandsPlace = alteredNumber % 10000;
+    numeralArray.push(thousandsDigitConverter(thousandsPlace));
+  } else if (alteredNumber >= 4000) {
+    numeralArray = ["Please enter a number smaller than 4000"];
+  }
 
   numeralArray.reverse();
   return numeralArray.join("");
@@ -90,7 +96,14 @@ function hundredsDigitConverter(hundredsPlace) {
   return hundredsDigits.join("");
 }
 
+function thousandsDigitConverter(thousandsPlace) {
+  var thousandsDigits = [];
+  for (i = 0; i < thousandsPlace; i += 1000) {
+    thousandsDigits.push("M");
+  };
 
+  return thousandsDigits.join("");
+}
 
 
 $(document).ready(function(){

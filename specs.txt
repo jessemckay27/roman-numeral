@@ -1,7 +1,15 @@
-Convert numbers 1,2,3 into appropriate roman numerals:
-  input 1 = "I"
+Convert numbers in ones place:
+  example input: 1
+  example output: I
 
-Convert number 5 into roman number V
-  input 5 = "V"
+Convert numbers in tens place:
+  example input: 10
+  example output: X
 
-Convert number 10
+Convert numbers in hundreds place:
+  example input: 100
+  example output: C
+
+Convert numbers in thousands place:
+  example input: 1000
+  example output: M

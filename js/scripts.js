@@ -1,43 +1,61 @@
-function onesDigitConverter(number) {
+function numeralControl(originalNumber) {
+  var alteredNumber = originalNumber;
+  var numeralArray = [];
+  if (alteredNumber % 10 != 0) {
+    var onesPlace = alteredNumber % 10;
+    numeralArray.push(onesDigitConverter(onesPlace));
+    alteredNumber -= onesPlace;
+  }
+  if (alteredNumber % 100 != 0) {
+    var tensPlace = alteredNumber % 100;
+    numeralArray.push(tensDigitConverter(tensPlace));
+    alteredNumber -= tensPlace;
+  };
+  numeralArray.reverse();
+  return numeralArray.join("");
+}
+
+function onesDigitConverter(onesPlace) {
   var romanNumeralArray = [];
-  if (number < 4) {
-    for (i = 0; i < number; i++) {
+  if (onesPlace < 4) {
+    for (i = 0; i < onesPlace; i++) {
       romanNumeralArray.push("I");
     };
 
-  } else if (number === 4) {
+  } else if (onesPlace === 4) {
     romanNumeralArray.push("IV");
 
-  } else if (5 <= number && number < 9) {
+  } else if (5 <= onesPlace && onesPlace < 9) {
     romanNumeralArray.push("V");
-    for (i = 5; i < number; i++) {
+    for (i = 5; i < onesPlace; i++) {
       romanNumeralArray.push("I");
     };
 
-  } else if (number === 9) {
+  } else if (onesPlace === 9) {
     romanNumeralArray.push("IX");
   };
 
   return romanNumeralArray.join("");
 }
 
-function tensDigitConverter(number) {
+function tensDigitConverter(tensPlace) {
+  console.log(tensPlace);
   var romanNumeralArray = [];
-  if (number < 40) {
-    for (i = 0; i < number; i++) {
-      romanNumeralArray.push("x");
-    };
-
-  } else if (number === 40) {
-    romanNumeralArray.push("XL");
-
-  } else if (50 <= number && number < 90) {
-    romanNumeralArray.push("L");
-    for (i = 5; i < number; i++) {
+  if (tensPlace < 40) {
+    for (i = 0; i < tensPlace; i += 10) {
       romanNumeralArray.push("X");
     };
 
-  } else if (number === 90) {
+  } else if (tensPlace === 40) {
+    romanNumeralArray.push("XL");
+
+  } else if (50 <= tensPlace && tensPlace < 90) {
+    romanNumeralArray.push("L");
+    for (i = 50; i < tensPlace; i += 10) {
+      romanNumeralArray.push("X");
+    };
+
+  } else if (tensPlace === 90) {
     romanNumeralArray.push("XC");
   };
 
@@ -49,7 +67,7 @@ $(document).ready(function(){
   $("form").submit(function(event){
     event.preventDefault();
 
-    $("#output").text(onesDigitConverter(parseInt($("#input").val())));
+    $("#output").text(numeralControl(parseInt($("#input").val())));
 
   });
 });
